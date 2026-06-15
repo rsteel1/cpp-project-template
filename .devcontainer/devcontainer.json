@@ -9,7 +9,8 @@
   "initializeCommand": "bash .devcontainer/init-zshrc.sh",
 
   "mounts": [
-    "source=${localWorkspaceFolder}/.devcontainer/.zshrc.local,target=/root/.zshrc,type=bind,consistency=cached"
+    "source=${localWorkspaceFolder}/.devcontainer/.zshrc.local,target=/root/.zshrc,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.config/gh,target=/root/.config/gh,type=bind,consistency=cached"
   ],
 
   // Required for sanitisers and ptrace-based debuggers
