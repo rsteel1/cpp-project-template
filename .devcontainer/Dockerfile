@@ -46,6 +46,13 @@ RUN update-alternatives --install /usr/bin/clang++     clang++     /usr/bin/clan
 ENV CC=clang
 ENV CXX=clang++
 
+# ── Locale (UTF-8 required for zsh Unicode/Powerline chars) ──────────────────
+RUN apt-get update && apt-get install -y locales \
+ && locale-gen en_US.UTF-8 \
+ && rm -rf /var/lib/apt/lists/*
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
 # ── GitHub CLI ────────────────────────────────────────────────────────────────
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
       | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
