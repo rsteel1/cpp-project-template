@@ -5,6 +5,13 @@
     "context": ".."
   },
 
+  // Copies ~/.zshrc on Mac/Linux/WSL; falls back to .zshrc.baseline on Windows
+  "initializeCommand": "bash .devcontainer/init-zshrc.sh",
+
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/.zshrc.local,target=/root/.zshrc,type=bind,consistency=cached"
+  ],
+
   // Required for sanitisers and ptrace-based debuggers
   "runArgs": [
     "--cap-add=SYS_PTRACE",
@@ -52,7 +59,7 @@
           "editor.defaultFormatter": "xaver.clang-format"
         },
         // Terminal defaults
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   },

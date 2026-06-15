@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     ca-certificates \
+    # Shell
+    zsh \
     # Valgrind for memory checking (ASan alternative when needed)
     valgrind \
     # Useful for inspecting assembly output
@@ -44,17 +46,10 @@ RUN update-alternatives --install /usr/bin/clang++     clang++     /usr/bin/clan
 ENV CC=clang
 ENV CXX=clang++
 
-# ── Non-root user (matches VSCode devcontainer convention) ────────────────────
-ARG USERNAME=dev
-ARG USER_UID=1000
-ARG USER_GID=1000
+# ── zsh + oh-my-zsh ───────────────────────────────────────────────────────────
+RUN chsh -s /usr/bin/zsh root
+RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /root/.oh-my-zsh
 
-RUN groupadd --gid $USER_GID $USERNAME \
- && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
- && apt-get update \
- && apt-get install -y sudo \
- && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
- && rm -rf /var/lib/apt/lists/*
+ENV SHELL=/usr/bin/zsh
 
-USER $USERNAME
 WORKDIR /workspace
