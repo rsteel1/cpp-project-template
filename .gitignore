@@ -22,3 +22,6 @@ compile_commands.json
 
 # Fetched dependencies (FetchContent downloads to build dir, but just in case)
 _deps/
+
+# clangd index cache
+.cache/
