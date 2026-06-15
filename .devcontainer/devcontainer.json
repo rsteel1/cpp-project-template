@@ -47,7 +47,8 @@
         "vadimcn.vscode-lldb",                      // LLDB debugger (works with clang)
         // Code quality
         "xaver.clang-format",                       // clang-format on save
-        "notskm.clang-tidy"                         // clang-tidy linting
+        "notskm.clang-tidy",                        // clang-tidy linting
+        "mine.cpplint"                              // cpplint style checker
       ],
       "settings": {
         // Use clangd instead of the default IntelliSense engine
@@ -69,7 +70,13 @@
           "editor.defaultFormatter": "xaver.clang-format"
         },
         // Terminal defaults
-        "terminal.integrated.defaultProfile.linux": "zsh"
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        // cpplint
+        "cpplint.cpplintPath": "cpplint",
+        "cpplint.linelength": "80",
+        "cpplint.extensions": ["cc", "h"],
+        "cpplint.headers": ["h"],
+        "cpplint.verbose": 1
       }
     }
   },

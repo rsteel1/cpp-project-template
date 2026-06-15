@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # ── CMake (recent version) ────────────────────────────────────────────────────
-RUN pip3 install cmake --break-system-packages
+RUN pip3 install cmake cpplint --break-system-packages
 
 # ── Symlink clang tools so they're on PATH without version suffix ─────────────
 RUN update-alternatives --install /usr/bin/clang++     clang++     /usr/bin/clang++-17     100 \
