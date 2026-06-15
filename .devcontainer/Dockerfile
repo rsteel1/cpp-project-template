@@ -63,6 +63,12 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
  && apt-get install -y gh \
  && rm -rf /var/lib/apt/lists/*
 
+# ── Node.js + Claude CLI ─────────────────────────────────────────────────────
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+ && apt-get install -y nodejs \
+ && rm -rf /var/lib/apt/lists/*
+RUN npm install -g @anthropic-ai/claude-code
+
 # ── zsh + oh-my-zsh ───────────────────────────────────────────────────────────
 RUN chsh -s /usr/bin/zsh root
 RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /root/.oh-my-zsh
