@@ -53,7 +53,7 @@ FetchContent_MakeAvailable(googlebenchmark)
 #  below and remove src/myproject.cpp
 # ─────────────────────────────────────────────────────────────
 add_library(myproject_lib STATIC
-    src/myproject.cpp
+    src/myproject.cc
 )
 
 target_include_directories(myproject_lib PUBLIC
@@ -72,7 +72,7 @@ apply_sanitizers(myproject_lib)
 enable_testing()
 
 add_executable(tests
-    tests/test_myproject.cpp
+    tests/myproject_test.cc
 )
 
 target_link_libraries(tests PRIVATE
@@ -90,7 +90,7 @@ catch_discover_tests(tests)
 #  BENCHMARKS
 # ─────────────────────────────────────────────────────────────
 add_executable(benchmarks
-    benchmarks/bench_myproject.cpp
+    benchmarks/bench_myproject.cc
 )
 
 target_link_libraries(benchmarks PRIVATE

@@ -1,14 +1,13 @@
 #include <benchmark/benchmark.h>
-#include "myproject.hpp"
 
-// ─────────────────────────────────────────────────────────────
-//  Example benchmark — replace with your own
-// ─────────────────────────────────────────────────────────────
+#include "myproject/myproject.h"
+
+// Example benchmark — replace with your own
 
 static void BM_Hello(benchmark::State& state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(myproject::hello());
-    }
+  for (auto _ : state) {
+    benchmark::DoNotOptimize(myproject::hello());
+  }
 }
 BENCHMARK(BM_Hello);
 
