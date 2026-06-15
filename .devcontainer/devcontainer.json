@@ -1,0 +1,62 @@
+{
+  "name": "C++ Dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+
+  // Required for sanitisers and ptrace-based debuggers
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt", "seccomp=unconfined"
+  ],
+
+  // Mount the workspace into the container
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+
+  // VSCode extensions installed automatically inside the container
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Language support
+        "llvm-vs-code-extensions.vscode-clangd",   // clangd LSP (autocomplete, go-to-def, etc.)
+        "ms-vscode.cmake-tools",                    // CMake integration
+        "twxs.cmake",                               // CMake syntax highlighting
+        // Testing
+        "matepek.vscode-catch2-test-adapter",       // Catch2 test explorer UI
+        "hbenl.vscode-test-explorer",               // Test explorer sidebar
+        // Debugging
+        "vadimcn.vscode-lldb",                      // LLDB debugger (works with clang)
+        // Code quality
+        "xaver.clang-format",                       // clang-format on save
+        "notskm.clang-tidy"                         // clang-tidy linting
+      ],
+      "settings": {
+        // Use clangd instead of the default IntelliSense engine
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "clangd.path": "/usr/bin/clangd",
+        "clangd.arguments": [
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--header-insertion=iwyu"
+        ],
+        // CMake
+        "cmake.configureOnOpen": true,
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.generator": "Ninja",
+        // Format on save
+        "editor.formatOnSave": true,
+        "[cpp]": {
+          "editor.defaultFormatter": "xaver.clang-format"
+        },
+        // Terminal defaults
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // Post-create: configure the default (no-sanitiser) build
+  "postCreateCommand": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json"
+}

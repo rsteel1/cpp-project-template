@@ -1,0 +1,16 @@
+# .clang-tidy
+# A practical set of checks — not exhaustive, not noisy
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers
+
+WarningsAsErrors: ""
+HeaderFilterRegex: "include/.*"
+FormatStyle: file

@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Tests",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/tests",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build"
+    },
+    {
+      "name": "Debug Benchmarks",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/benchmarks",
+      "args": ["--benchmark_filter=${input:benchmarkFilter}"],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "Build"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "benchmarkFilter",
+      "type": "promptString",
+      "description": "Benchmark filter (leave empty to run all)",
+      "default": ""
+    }
+  ]
+}

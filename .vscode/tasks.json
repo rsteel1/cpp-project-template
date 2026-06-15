@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure (Debug)",
+      "type": "shell",
+      "command": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "cmake --build build",
+      "group": { "kind": "build", "isDefault": true },
+      "dependsOn": "Configure (Debug)",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Run Tests",
+      "type": "shell",
+      "command": "cmake --build build && cd build && ctest --output-on-failure",
+      "group": { "kind": "test", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Run Benchmarks",
+      "type": "shell",
+      "command": "cmake --build build && ./build/benchmarks",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Configure + Build (ASan)",
+      "type": "shell",
+      "command": "cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON && cmake --build build-asan",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Run Tests (ASan)",
+      "type": "shell",
+      "command": "cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON && cmake --build build-asan && cd build-asan && ctest --output-on-failure",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Configure + Build (TSan)",
+      "type": "shell",
+      "command": "cmake -S . -B build-tsan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TSAN=ON && cmake --build build-tsan",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Run Tests (TSan)",
+      "type": "shell",
+      "command": "cmake -S . -B build-tsan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TSAN=ON && cmake --build build-tsan && cd build-tsan && ctest --output-on-failure",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Clean All Builds",
+      "type": "shell",
+      "command": "rm -rf build build-asan build-tsan",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    }
+  ]
+}
