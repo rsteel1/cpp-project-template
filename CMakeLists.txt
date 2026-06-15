@@ -50,14 +50,14 @@ FetchContent_MakeAvailable(googlebenchmark)
 #  LIBRARY  (your implementation)
 #
 #  Header-only project?  Change STATIC → INTERFACE everywhere
-#  below and remove src/myproject.cpp
+#  below and remove src/myproject/myproject.cc
 # ─────────────────────────────────────────────────────────────
 add_library(myproject_lib STATIC
-    src/myproject.cc
+    src/myproject/myproject.cc
 )
 
 target_include_directories(myproject_lib PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 target_compile_options(myproject_lib PRIVATE
@@ -72,7 +72,7 @@ apply_sanitizers(myproject_lib)
 enable_testing()
 
 add_executable(tests
-    tests/myproject_test.cc
+    src/myproject/myproject_test.cc
 )
 
 target_link_libraries(tests PRIVATE
