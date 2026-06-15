@@ -1,22 +1,2 @@
-# .clang-format
-# Based on LLVM style with adjustments for readability
-BasedOnStyle: LLVM
-IndentWidth: 4
-ColumnLimit: 100
-AccessModifierOffset: -4
-
-# Braces
-BreakBeforeBraces: Attach
-
-# Includes
-SortIncludes: CaseInsensitive
-IncludeBlocks: Regroup
-
-# Modern C++ preferences
+BasedOnStyle: Google
 Standard: c++20
-Cpp11BracedListStyle: true
-
-# Spacing
-SpaceBeforeParens: ControlStatements
-SpaceInEmptyParentheses: false
-SpacesInAngles: Never

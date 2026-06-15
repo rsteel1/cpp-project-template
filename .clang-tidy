@@ -1,15 +1,15 @@
-# .clang-tidy
-# A practical set of checks — not exhaustive, not noisy
 Checks: >
   clang-diagnostic-*,
   clang-analyzer-*,
-  cppcoreguidelines-*,
+  bugprone-*,
+  google-*,
   modernize-*,
   performance-*,
   readability-*,
+  -google-objc-*,
+  -google-runtime-member-string-references,
   -modernize-use-trailing-return-type,
-  -readability-magic-numbers,
-  -cppcoreguidelines-avoid-magic-numbers
+  -readability-magic-numbers
 
 WarningsAsErrors: ""
 HeaderFilterRegex: "include/.*"
