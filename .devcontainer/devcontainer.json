@@ -69,7 +69,7 @@
         "cmake.generator": "Ninja",
         // Format and fixups on save
         "editor.formatOnSave": true,
-        "editor.insertFinalNewline": true,
+        "files.insertFinalNewline": true,
         "files.trimTrailingWhitespace": true,
         "files.trimFinalNewlines": true,
         "[cpp]": {
