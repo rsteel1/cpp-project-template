@@ -1,0 +1,128 @@
+{
+  "Header Guard": {
+    "prefix": "hguard",
+    "description": "Google C++ header include guard (PATH_ prefix = e.g. SRC_MODULE)",
+    "scope": "cpp",
+    "body": [
+      "#ifndef ${1:PATH}_${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
+      "#define ${1:PATH}_${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_",
+      "",
+      "$0",
+      "",
+      "#endif  // ${1:PATH}_${TM_FILENAME_BASE/(.*)/${1:/upcase}/}_H_"
+    ]
+  },
+
+  "Namespace Block": {
+    "prefix": "ns",
+    "description": "namespace block with closing comment",
+    "scope": "cpp",
+    "body": [
+      "namespace ${1:name} {",
+      "",
+      "$0",
+      "",
+      "}  // namespace ${1:name}"
+    ]
+  },
+
+  "Class": {
+    "prefix": "cls",
+    "description": "Google C++ style concrete class with deleted copy/move",
+    "scope": "cpp",
+    "body": [
+      "class ${1:ClassName} {",
+      " public:",
+      "  explicit ${1:ClassName}(${2:params});",
+      "  ~${1:ClassName}();",
+      "",
+      "  ${1:ClassName}(const ${1:ClassName}&) = delete;",
+      "  ${1:ClassName}& operator=(const ${1:ClassName}&) = delete;",
+      "",
+      " private:",
+      "  $0",
+      "};"
+    ]
+  },
+
+  "Interface Class": {
+    "prefix": "icls",
+    "description": "Pure abstract interface (Google C++ style)",
+    "scope": "cpp",
+    "body": [
+      "class ${1:I${2:Name}} {",
+      " public:",
+      "  virtual ~${1:I${2:Name}}() = default;",
+      "",
+      "  virtual ${3:void} ${4:Method}(${5:params}) = 0;",
+      "",
+      "  ${1:I${2:Name}}(const ${1:I${2:Name}}&) = delete;",
+      "  ${1:I${2:Name}}& operator=(const ${1:I${2:Name}}&) = delete;",
+      "};"
+    ]
+  },
+
+  "Catch2 TEST_CASE": {
+    "prefix": "tc",
+    "description": "Catch2 TEST_CASE block",
+    "scope": "cpp",
+    "body": [
+      "TEST_CASE(\"${1:description}\", \"[${2:tag}]\") {",
+      "  $0",
+      "}"
+    ]
+  },
+
+  "Catch2 SECTION": {
+    "prefix": "sec",
+    "description": "Catch2 SECTION sub-case",
+    "scope": "cpp",
+    "body": [
+      "SECTION(\"${1:description}\") {",
+      "  $0",
+      "}"
+    ]
+  },
+
+  "Catch2 TEST_CASE with SECTION": {
+    "prefix": "tcs",
+    "description": "Catch2 TEST_CASE with a SECTION scaffold",
+    "scope": "cpp",
+    "body": [
+      "TEST_CASE(\"${1:description}\", \"[${2:tag}]\") {",
+      "  ${3:// shared setup}",
+      "",
+      "  SECTION(\"${4:case}\") {",
+      "    $0",
+      "  }",
+      "}"
+    ]
+  },
+
+  "TODO Comment": {
+    "prefix": "todo",
+    "description": "Google C++ TODO(owner) comment",
+    "scope": "cpp",
+    "body": [
+      "// TODO(${1:owner}): $0"
+    ]
+  },
+
+  "Nodiscard Declaration": {
+    "prefix": "ndf",
+    "description": "[[nodiscard]] function declaration",
+    "scope": "cpp",
+    "body": [
+      "[[nodiscard]] ${1:ReturnType} ${2:FunctionName}(${3:params})${4: const};"
+    ]
+  },
+
+  "Absl Status Return": {
+    "prefix": "ret",
+    "description": "Early-return pattern for absl::Status / StatusOr",
+    "scope": "cpp",
+    "body": [
+      "if (!${1:status}.ok()) return ${1:status};"
+    ]
+  }
+}
