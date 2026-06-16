@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     lldb-17 \
     # GCC as a secondary compiler (useful for catching compiler-specific warnings)
     g++ \
+    # Include What You Use — finds missing/unused #includes
+    iwyu \
     # CMake (latest via pip is cleaner than apt on Ubuntu)
     python3-pip \
     # Git and utilities
