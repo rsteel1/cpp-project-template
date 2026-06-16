@@ -1,3 +1,6 @@
 BasedOnStyle: Google
 Standard: c++20
 IncludeBlocks: Regroup
+BreakBeforeBraces: Allman
+BreakConstructorInitializers: BeforeColon
+AllowShortFunctionsOnASingleLine: None
