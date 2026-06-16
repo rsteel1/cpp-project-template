@@ -10,7 +10,8 @@
   "remoteEnv": {
     "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
     "GIT_SSH_COMMAND": "ssh -o 'IgnoreUnknown UseKeychain'",
-    "HOST_HOME": "${localEnv:HOME}"
+    "HOST_HOME": "${localEnv:HOME}",
+    "XDG_CACHE_HOME": "/root/cache"
   },
 
   // Copies ~/.zshrc on Mac/Linux/WSL; falls back to .zshrc.baseline on Windows
