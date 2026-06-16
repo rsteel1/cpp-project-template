@@ -64,6 +64,20 @@
       "command": "rm -rf build build-asan build-tsan",
       "group": "build",
       "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "IWYU: Check (dry run)",
+      "type": "shell",
+      "command": "iwyu_tool.py -p build 2>&1 | tee /tmp/iwyu.out && echo '\\nDone. Run \"IWYU: Fix\" to apply.'",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "IWYU: Fix",
+      "type": "shell",
+      "command": "iwyu_tool.py -p build 2>&1 | fix_includes.py && echo '\\nIncludes updated. Review changes with git diff.'",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
     }
   ]
 }
