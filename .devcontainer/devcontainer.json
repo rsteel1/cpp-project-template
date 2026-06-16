@@ -9,7 +9,8 @@
 
   "remoteEnv": {
     "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
-    "GIT_SSH_COMMAND": "ssh -o 'IgnoreUnknown UseKeychain'"
+    "GIT_SSH_COMMAND": "ssh -o 'IgnoreUnknown UseKeychain'",
+    "HOST_HOME": "${localEnv:HOME}"
   },
 
   // Copies ~/.zshrc on Mac/Linux/WSL; falls back to .zshrc.baseline on Windows
@@ -82,6 +83,6 @@
     }
   },
 
-  // Post-create: configure the default (no-sanitiser) build
-  "postCreateCommand": "rm -rf build && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json"
+  // Post-create: configure the default (no-sanitiser) build, then wire caveman hooks
+  "postCreateCommand": "rm -rf build && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json && bash .devcontainer/install-caveman.sh"
 }
