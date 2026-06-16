@@ -8,7 +8,8 @@
   "remoteUser": "root",
 
   "remoteEnv": {
-    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "GIT_SSH_COMMAND": "ssh -o 'IgnoreUnknown UseKeychain'"
   },
 
   // Copies ~/.zshrc on Mac/Linux/WSL; falls back to .zshrc.baseline on Windows
