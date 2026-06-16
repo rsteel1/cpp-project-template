@@ -3,4 +3,5 @@ Standard: c++20
 IncludeBlocks: Regroup
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: Never
 AllowShortFunctionsOnASingleLine: None
