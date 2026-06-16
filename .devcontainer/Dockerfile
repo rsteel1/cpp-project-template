@@ -75,4 +75,7 @@ RUN git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git /root/.oh-my-zsh
 
 ENV SHELL=/usr/bin/zsh
 
+# ── SSH: ignore macOS-only options (e.g. UseKeychain) ────────────────────────
+RUN echo "IgnoreUnknown UseKeychain" >> /etc/ssh/ssh_config
+
 WORKDIR /workspace

@@ -72,7 +72,7 @@
         // Terminal defaults
         "terminal.integrated.defaultProfile.linux": "zsh",
         // cpplint
-        "cpplint.cpplintPath": "cpplint",
+        "cpplint.cpplintPath": "/usr/local/bin/cpplint",
         "cpplint.linelength": "80",
         "cpplint.extensions": ["cc", "h"],
         "cpplint.headers": ["h"],
