@@ -67,8 +67,11 @@
         "cmake.configureOnOpen": true,
         "cmake.buildDirectory": "${workspaceFolder}/build",
         "cmake.generator": "Ninja",
-        // Format on save
+        // Format and fixups on save
         "editor.formatOnSave": true,
+        "editor.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "files.trimFinalNewlines": true,
         "[cpp]": {
           "editor.defaultFormatter": "xaver.clang-format"
         },
