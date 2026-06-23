@@ -2,7 +2,7 @@
   "recommendations": [
     "ms-vscode-remote.remote-containers",
     "llvm-vs-code-extensions.vscode-clangd",
-    "ms-vscode.cmake-tools",
+    "BazelBuild.vscode-bazel",
     "vadimcn.vscode-lldb",
     "matepek.vscode-catch2-test-adapter",
     "hbenl.vscode-test-explorer",

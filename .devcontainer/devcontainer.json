@@ -41,10 +41,9 @@
       "extensions": [
         // Language support
         "llvm-vs-code-extensions.vscode-clangd",   // clangd LSP (autocomplete, go-to-def, etc.)
-        "ms-vscode.cmake-tools",                    // CMake integration
-        "twxs.cmake",                               // CMake syntax highlighting
+        "BazelBuild.vscode-bazel",                  // Bazel integration
         // Testing
-        "matepek.vscode-catch2-test-adapter",       // Catch2 test explorer UI
+        "matepek.vscode-catch2-test-adapter",       // Test Mate C++ (GTest/Catch2/doctest runner)
         "hbenl.vscode-test-explorer",               // Test explorer sidebar
         // Debugging
         "vadimcn.vscode-lldb",                      // LLDB debugger (works with clang)
@@ -63,10 +62,6 @@
           "--completion-style=detailed",
           "--header-insertion=iwyu"
         ],
-        // CMake
-        "cmake.configureOnOpen": true,
-        "cmake.buildDirectory": "${workspaceFolder}/build",
-        "cmake.generator": "Ninja",
         // Format and fixups on save
         "editor.formatOnSave": true,
         "files.insertFinalNewline": true,
@@ -83,13 +78,13 @@
         // cpplint
         "cpplint.cpplintPath": "/usr/local/bin/cpplint",
         "cpplint.linelength": "80",
-        "cpplint.extensions": ["cc", "h"],
+        "cpplint.extensions": ["cpp", "h"],
         "cpplint.headers": ["h"],
         "cpplint.verbose": 1
       }
     }
   },
 
-  // Post-create: configure the default (no-sanitiser) build, then wire caveman hooks
-  "postCreateCommand": "git config --global user.name \"$(git config -f /root/.gitconfig.host user.name)\" && git config --global user.email \"$(git config -f /root/.gitconfig.host user.email)\" && rm -rf build && cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json && bash .devcontainer/install-caveman.sh"
+  // Post-create: configure git identity, build all targets, generate compile_commands.json for clangd, wire caveman hooks
+  "postCreateCommand": "git config --global user.name \"$(git config -f /root/.gitconfig.host user.name)\" && git config --global user.email \"$(git config -f /root/.gitconfig.host user.email)\" && bazel build //... && bazel-compile-commands //... && bash .devcontainer/install-caveman.sh"
 }

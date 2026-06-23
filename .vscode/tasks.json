@@ -2,66 +2,65 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Configure (Debug)",
-      "type": "shell",
-      "command": "cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && ln -sf build/compile_commands.json compile_commands.json",
-      "group": "build",
-      "presentation": { "reveal": "always", "panel": "shared" }
-    },
-    {
       "label": "Build",
       "type": "shell",
-      "command": "cmake --build build",
+      "command": "bazel build //...",
       "group": { "kind": "build", "isDefault": true },
-      "dependsOn": "Configure (Debug)",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
       "label": "Run Tests",
       "type": "shell",
-      "command": "cmake --build build && cd build && ctest --output-on-failure",
+      "command": "bazel test //...",
       "group": { "kind": "test", "isDefault": true },
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
       "label": "Run Benchmarks",
       "type": "shell",
-      "command": "cmake --build build && ./build/benchmarks",
+      "command": "bazel run //benchmarks:benchmarks",
       "group": "test",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
-      "label": "Configure + Build (ASan)",
+      "label": "Build (ASan)",
       "type": "shell",
-      "command": "cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON && cmake --build build-asan",
+      "command": "bazel build //... --config=asan",
       "group": "build",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
       "label": "Run Tests (ASan)",
       "type": "shell",
-      "command": "cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_ASAN=ON && cmake --build build-asan && cd build-asan && ctest --output-on-failure",
+      "command": "bazel test //... --config=asan",
       "group": "test",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
-      "label": "Configure + Build (TSan)",
+      "label": "Build (TSan)",
       "type": "shell",
-      "command": "cmake -S . -B build-tsan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TSAN=ON && cmake --build build-tsan",
+      "command": "bazel build //... --config=tsan",
       "group": "build",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
       "label": "Run Tests (TSan)",
       "type": "shell",
-      "command": "cmake -S . -B build-tsan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TSAN=ON && cmake --build build-tsan && cd build-tsan && ctest --output-on-failure",
+      "command": "bazel test //... --config=tsan",
       "group": "test",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
     {
-      "label": "Clean All Builds",
+      "label": "Refresh compile_commands.json",
       "type": "shell",
-      "command": "rm -rf build build-asan build-tsan",
+      "command": "bazel-compile-commands //...",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "bazel clean",
       "group": "build",
       "presentation": { "reveal": "always", "panel": "shared" }
     },

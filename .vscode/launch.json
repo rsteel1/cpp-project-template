@@ -5,7 +5,7 @@
       "name": "Debug Tests",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/tests",
+      "program": "${workspaceFolder}/bazel-bin/src/myproject/tests",
       "args": [],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "Build"
@@ -14,7 +14,7 @@
       "name": "Debug Benchmarks",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/benchmarks",
+      "program": "${workspaceFolder}/bazel-bin/benchmarks/benchmarks",
       "args": ["--benchmark_filter=${input:benchmarkFilter}"],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "Build"

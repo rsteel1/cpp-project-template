@@ -1,0 +1,22 @@
+common --enable_bzlmod
+
+build --action_env=CC
+build --action_env=CXX
+build --cxxopt=-std=c++20
+build --host_cxxopt=-std=c++20
+build --cxxopt=-Wall
+build --cxxopt=-Wextra
+build --cxxopt=-Wpedantic
+build --cxxopt=-Wshadow
+build --cxxopt=-Wconversion
+build --cxxopt=-Werror
+
+# AddressSanitizer + UBSanitizer
+build:asan --cxxopt=-fsanitize=address,undefined
+build:asan --linkopt=-fsanitize=address,undefined
+build:asan --cxxopt=-fno-omit-frame-pointer
+
+# ThreadSanitizer
+build:tsan --cxxopt=-fsanitize=thread
+build:tsan --linkopt=-fsanitize=thread
+build:tsan --cxxopt=-fno-omit-frame-pointer
